@@ -1,0 +1,66 @@
+:root {
+    --primary-green: #8cc63f;
+    --text-dark: #2f3542;
+    --bg-light: #eef3e6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+body {
+    background-color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.navbar {
+    position: fixed; top: 0; width: 100%; display: flex;
+    justify-content: space-between; align-items: center;
+    background: var(--bg-light); padding: 15px 40px; z-index: 1000;
+}
+
+.nav-left { display: flex; align-items: center; }
+.logo { font-size: 24px; font-weight: bold; }
+.divider { margin: 0 20px; color: #333; }
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-right: 20px; }
+nav ul li a { text-decoration: none; color: #000; }
+
+.cta-button {
+    background-color: var(--primary-green);
+    padding: 10px 20px; border-radius: 4px; text-decoration: none; color: #000;
+}
+
+.container { width: 90%; max-width: 400px; margin-top: 80px; text-align: center; }
+
+.slide { display: none; animation: fadeIn 0.4s; }
+.slide.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+h1 { color: var(--text-dark); margin-bottom: 20px; font-size: 1.8rem; }
+p { color: #666; margin-bottom: 30px; }
+
+input {
+    width: 100%; padding: 15px; border-radius: 12px;
+    border: 1px solid #ddd; margin-bottom: 20px; font-size: 1rem;
+}
+
+.next-btn {
+    background: var(--primary-green); color: white; border: none;
+    padding: 15px; border-radius: 30px; width: 100%; cursor: pointer; font-weight: bold;
+}
+
+.option-btn {
+    width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 15px;
+    border: 1px solid #eee; background: white; cursor: pointer; text-align: left;
+}
+
+.back-btn { background: none; border: none; color: #aaa; cursor: pointer; margin-bottom: 10px; }
+
+/* Language Toggle Styles */
+.lang-select { margin-bottom: 20px; text-align: left; background: #f9f9f9; padding: 10px; border-radius: 10px; }
+.lang-options { margin-top: 10px; display: flex; gap: 20px; }
+.shape-top { position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--primary-green); border-radius: 50%; z-index: -1; }
+.shape-bottom { position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; background: #a4b0be66; border-radius: 50%; z-index: -1; }

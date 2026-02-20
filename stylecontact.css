@@ -1,0 +1,121 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E9F5E1; /* Light green background */
+  padding: 15px 40px;
+}
+
+/* Left Section (Logo + Nav) */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.divider {
+  margin: 0 20px;
+  font-size: 24px;
+  color: #333;
+  font-weight: 300;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-right: 25px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+/* Right Section (Socials + Button) */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  color: #000;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+/* The Green CTA Button */
+.cta-button {
+  background-color: #8CC63F; /* The specific lime green from your image */
+  color: #000;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px; /* Slight curve */
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #7ab332;
+}
+
+
+
+/* Custom Brand Variables */
+:root {
+  --agro-bg: #E9F5E1;     /* Your light green background */
+  --agro-lime: #8CC63F;   /* Your signature lime green */
+  --agro-dark: #101F01;   /* Your deep forest green/black */
+}
+
+body {
+  background-color: var(--agro-bg);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Overriding Tailwind's green-700 to match your agro-dark */
+.bg-green-700 {
+  background-color: var(--agro-dark) !important;
+}
+
+.text-green-700 {
+  color: var(--agro-dark) !important;
+}
+
+/* Styling the icon backgrounds to use your brand lime green */
+.bg-green-100 {
+  background-color: var(--agro-lime) !important;
+  color: var(--agro-dark) !important;
+}
+
+/* Button Hover State */
+button[type="submit"]:hover {
+  background-color: var(--agro-lime) !important;
+  color: var(--agro-dark) !important;
+}
+
+/* Input Focus States */
+input:focus, textarea:focus {
+  border-color: var(--agro-lime) !important;
+  box-shadow: 0 0 0 3px rgba(140, 198, 63, 0.2) !important;
+}

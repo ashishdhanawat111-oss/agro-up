@@ -1,0 +1,334 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E9F5E1; /* Light green background */
+  padding: 15px 40px;
+}
+
+/* Left Section (Logo + Nav) */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.divider {
+  margin: 0 20px;
+  font-size: 24px;
+  color: #333;
+  font-weight: 300;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-right: 25px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+/* Right Section (Socials + Button) */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  color: #000;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+/* The Green CTA Button */
+.cta-button {
+  background-color: #8CC63F; /* The specific lime green from your image */
+  color: #000;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px; /* Slight curve */
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #7ab332;
+}
+
+
+
+
+
+/* Subscription Hero Container */
+.sub-hero {
+  position: relative;
+  height: 80vh; /* Takes up 80% of the screen height */
+  /* Replace 'fruits-bg.jpg' with your actual background image of fresh produce */
+  background: url('sub\ image.jpeg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+}
+
+/* Dark Gradient Overlay (Heavier on the left for text readability) */
+.sub-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(16, 31, 1, 0.9) 30%, rgba(16, 31, 1, 0.3) 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 10%;
+}
+
+/* Text Content Styling */
+.sub-hero-content {
+  max-width: 700px;
+  color: white;
+  font-family: 'Inter', sans-serif; /* Matching your website font */
+}
+
+.sub-hero-subtitle {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 20px;
+  color: #8CC63F; /* Using your theme's lime green */
+}
+
+.sub-hero-title {
+  font-size: 80px; /* Big, bold display font */
+  line-height: 1.05;
+  font-weight: 800;
+  margin-bottom: 30px;
+  letter-spacing: -2px;
+}
+
+.sub-hero-description {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  opacity: 0.9;
+  max-width: 500px;
+}
+
+/* Button Layout */
+.sub-hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 18px 35px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn-primary {
+  background-color: #8CC63F; /* Theme Lime Green */
+  color: #101F01;
+}
+
+.btn-secondary {
+  background-color: #E9F5E1; /* Theme Light Green */
+  color: #101F01;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .sub-hero-title {
+    font-size: 48px;
+  }
+  .sub-hero-overlay {
+    padding: 0 5%;
+    background: rgba(16, 31, 1, 0.75); /* Darker overlay for mobile */
+  }
+  .sub-hero-buttons {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+.pricing-section {
+  background-color: #E9F5E1; /* agro up theme background */
+  padding: 80px 5%;
+  font-family: 'Inter', sans-serif;
+}
+
+.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: #fdfdfd;
+  border-radius: 30px;
+  border: 1px solid #e2e8df;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Featured / Pro Card Style */
+.pricing-card.featured {
+  background-color: #e5edff; /* Light blue tint like reference */
+  border: 1px solid #cbd5e1;
+}
+
+.card-header {
+  padding: 40px 30px;
+  position: relative;
+}
+
+.popular-tag {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: #101F01;
+  color: white;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.card-header h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.card-header p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+.price {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.price span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.pause-text {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.plan-btn {
+  display: block;
+  text-align: center;
+  padding: 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 15px;
+  background: #101F01;
+  color: white;
+}
+
+.plan-btn.dark { background: #101F01; color: white; }
+.plan-btn.outline { background: transparent; border: 1px solid #101F01; color: #101F01; }
+
+.book-call {
+  display: block;
+  text-align: center;
+  text-decoration: underline;
+  color: #101F01;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Bottom Features Box */
+.card-features {
+  background: white;
+  margin: 10px;
+  padding: 30px;
+  border-radius: 25px;
+  flex-grow: 1;
+}
+
+.card-features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card-features ul li {
+  font-size: 14px;
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
+  color: #333;
+}
+
+.card-features ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #8CC63F;
+  font-weight: bold;
+}
+
+.included-services {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+}
+
+.included-services span {
+  font-size: 11px;
+  padding: 5px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  color: #666;
+}

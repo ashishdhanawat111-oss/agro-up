@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshDirect | Professional Grocery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="stylepro.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">AGRO-UP</a>
+            <span class="divider">|</span>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about2.html">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="farmer2.html">Partnership</a></li>
+                    <li><a href="subscription.html">Subscription</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="#" class="cta-button">Order now</a>
+        </div>
+    </header>
+
+    <!-- Main Functional Navbar -->
+    <nav class="functional-navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-logo"><i class="fas fa-bolt"></i> AGRO-UP</a>
+
+            <div class="search-bar">
+                <i class="fas fa-location-dot"></i>
+                <input type="text" id="pincode" placeholder="Enter Pincode for instant delivery...">
+                <button onclick="checkLocation()">Verify</button>
+            </div>
+
+            <!-- Blinkit-style Cart Button -->
+            <div class="blinkit-cart-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-info" id="cart-btn-info">
+                    <span class="cart-empty-text">My Cart</span>
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="welcome-hero" class="hero-section">
+            <h1>Farm-to-Table in <span>10 Minutes</span></h1>
+            <p>Enter your pincode to browse the freshest harvest in your neighborhood.</p>
+        </div>
+
+        <section id="product-section" class="hidden">
+            <div class="section-header">
+                <h2>Bestsellers in your area</h2>
+                <div id="loc-tag" class="loc-tag"></div>
+            </div>
+            <div class="product-grid" id="product-grid"></div>
+        </section>
+    </main>
+
+    <div id="cart-sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>My Cart</h3>
+            <button class="close-icon" onclick="toggleCart()">&times;</button>
+        </div>
+
+        <div id="cart-view">
+            <div id="cart-items-list" class="scroll-area"></div>
+            <div class="checkout-summary">
+                <div class="summary-line"><span>Subtotal</span><span id="sub-total">₹0</span></div>
+                <div class="summary-line"><span>Delivery Fee</span><span class="free">FREE</span></div>
+                <button class="pay-btn" onclick="openAddressForm()">Proceed to Address <i
+                        class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <div id="address-view" class="hidden">
+            <div class="form-body">
+                <h4>Delivery Address</h4>
+                <div class="input-wrap">
+                    <i class="fas fa-home"></i>
+                    <textarea id="address" placeholder="Flat No, Wing, Building Name..."></textarea>
+                </div>
+                <h4>Payment Method</h4>
+                <div class="payment-options">
+                    <label class="pay-card"><input type="radio" name="pay" value="UPI"
+                            checked><span>UPI/GPay</span></label>
+                    <label class="pay-card"><input type="radio" name="pay" value="COD"><span>Cash</span></label>
+                </div>
+                <button class="pay-btn" onclick="placeOrder()">Place Order</button>
+                <button class="text-btn" onclick="backToCart()">Modify Items</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pincode Modal -->
+    <div id="pincode-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="margin-bottom: 20px;">
+                <i class="fas fa-location-dot"
+                    style="font-size: 3rem; color: var(--brand); background: #e1fdf4; width: 80px; height: 80px; line-height: 80px; border-radius: 50%;"></i>
+            </div>
+            <h2>Delivery Location</h2>
+            <p>Enter your 6-digit pincode to check availability in your neighborhood.</p>
+            <div class="modal-input-group">
+                <input type="text" id="modal-pincode" placeholder="Ex: 400050" maxlength="6" autofocus>
+                <button class="modal-btn" onclick="checkModalLocation()">
+                    Start Shopping <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scriptpro.js"></script>
+</body>
+
+</html>

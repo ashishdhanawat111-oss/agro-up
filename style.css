@@ -1,0 +1,563 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E9F5E1; /* Light green background */
+  padding: 15px 40px;
+}
+
+/* Left Section (Logo + Nav) */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.divider {
+  margin: 0 20px;
+  font-size: 24px;
+  color: #333;
+  font-weight: 300;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-right: 25px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+/* Right Section (Socials + Button) */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  color: #000;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+/* The Green CTA Button */
+.cta-button {
+  background-color: #8CC63F; /* The specific lime green from your image */
+  color: #000;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px; /* Slight curve */
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #7ab332;
+}
+
+
+
+/* Hero Section Container */
+.hero {
+  position: relative;
+  height: 90vh; /* Adjust height as needed */
+  background: url('homeimg.jpeg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+}
+
+/* Dark Green Overlay (Fades from left to right) */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(16, 31, 1, 0.9) 20%, rgba(16, 31, 1, 0.4) 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 80px; /* Aligns content to the left */
+}
+
+/* Typography */
+.hero-content {
+  max-width: 600px;
+  color: white;
+}
+
+.hero-subtitle {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.hero-subtitle::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background-color: white;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.hero-title {
+  font-size: 4rem; /* Big, bold heading */
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* Hero Buttons */
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 15px 35px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: #8CC63F; /* Lime Green */
+  color: #101F01;
+}
+
+.btn-secondary {
+  background-color: #E9F5E1; /* Very Light Green */
+  color: #101F01;
+}
+
+
+/* Section Background */
+.info-section {
+  background-color: #E9F5E1; /* Same light green as the header */
+  padding: 80px 10%; /* Ample vertical and horizontal spacing */
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Heading Style */
+.info-title {
+  flex: 1;
+}
+
+.info-title h2 {
+  font-size: 64px; /* Large and bold */
+  font-weight: 800;
+  color: #000;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+/* Right Content Style */
+.info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.info-content p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+/* Buttons for this section */
+.info-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.info-buttons a {
+  padding: 15px 35px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-start {
+  background-color: #8CC63F; /* Primary Green */
+  color: #000;
+}
+
+.btn-learn {
+  background-color: #DCEBD2; /* Slightly darker shade of the background */
+  color: #000;
+}
+
+.info-buttons a:hover {
+  opacity: 0.8;
+}
+
+/* Responsive handling for tablets/phones */
+@media (max-width: 900px) {
+  .info-container {
+    flex-direction: column;
+    text-align: left;
+  }
+  .info-title h2 {
+    font-size: 40px;
+  }
+}
+
+
+.features-section {
+  background-color: #E9F5E1; /* Light green theme */
+  padding: 100px 10%;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 60px 40px; /* Vertical and Horizontal spacing */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image styling to match heading width */
+.feature-img {
+  width: 100%; /* Matches the width of the container/heading */
+  height: auto;
+  border-radius: 8px; /* Optional: smooth corners */
+  margin-bottom: 25px;
+  object-fit: cover;
+}
+
+.feature-item h3 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 15px;
+  letter-spacing: -0.5px;
+}
+
+.feature-item p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  opacity: 0.9;
+}
+
+/* Responsive: 1 column on mobile, 2 on tablets */
+@media (max-width: 992px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+.reviews-section {
+  background-color: #E9F5E1;
+  padding: 80px 10%;
+  font-family: 'Inter', sans-serif;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.header-left h2 {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.btn-outline {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: 1px solid #000;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.review-card {
+  background-color: #DCEBD2; /* Slightly darker green for the card */
+  padding: 40px;
+  border-radius: 4px;
+  /* Remove opacity: 0; here if you want them visible without JS */
+}
+
+.user-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* This is what the JavaScript triggers */
+.fade-in-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
+.final-cta {
+background-color: #E9F5E1;
+padding: 100px 20px;
+text-align: center;
+}
+
+.cta-title {
+font-size: 72px;
+font-weight: 800;
+line-height: 1.1;
+margin-bottom: 30px;
+}
+
+.cta-subtitle {
+font-size: 18px;
+color: #333;
+margin-bottom: 40px;
+}
+
+.cta-actions {
+display: flex;
+justify-content: center;
+gap: 20px;
+}
+
+.btn-solid {
+background-color: #DCEBD2;
+padding: 18px 35px;
+text-decoration: none;
+color: black;
+font-weight: 600;
+}
+
+.btn-outline-dark {
+border: 1px solid black;
+padding: 18px 35px;
+text-decoration: none;
+color: black;
+font-weight: 600;
+}
+
+
+.about-section {
+  background-color: #E9F5E1; /* Light green theme */
+  padding: 100px 10%;
+  font-family: 'Inter', sans-serif;
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Aligns the top of both columns */
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Column Styling */
+.about-header {
+  flex: 1.2; /* Makes the heading side slightly wider */
+}
+
+.about-header .small-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.about-header h2 {
+  font-size: 64px; /* Large and bold as per your image */
+  font-weight: 800;
+  line-height: 1.1;
+  color: #000;
+  letter-spacing: -1.5px;
+}
+
+/* Right Column Styling */
+.about-body {
+  flex: 1; /* Description side */
+  padding-top: 45px; /* Pushes text down to align with the main heading */
+}
+
+.about-body p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Responsive: Stacks on top of each other on mobile */
+@media (max-width: 992px) {
+  .about-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .about-header h2 {
+    font-size: 42px;
+  }
+  
+  .about-body {
+    padding-top: 0;
+  }
+}
+
+
+.main-footer {
+  background-color: #E9F5E1; /* Same theme color */
+  padding: 60px 5% 20px 5%;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Navigation Links */
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  transition: opacity 0.3s;
+}
+
+.footer-nav a:hover {
+  opacity: 0.6;
+}
+
+/* Horizontal Divider Lines */
+.footer-divider {
+  border: 0;
+  border-top: 1px solid #000;
+  margin: 0;
+  opacity: 1;
+}
+
+/* Central Logo Section */
+.footer-logo-container {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 80px; /* Large display font */
+  font-weight: 800;
+  color: #000;
+  letter-spacing: -2px;
+}
+
+/* Bottom Bar Styling */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+.footer-socials a {
+  margin-left: 15px;
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .footer-logo {
+    font-size: 48px;
+  }
+  
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
