@@ -49,7 +49,7 @@
             </div>
 
             <!-- Blinkit-style Cart Button -->
-            <div class="blinkit-cart-btn" onclick="toggleCart()">
+            <div class="blinkit-cart-btn" onclick="openDashboard()">
                 <i class="fas fa-shopping-cart"></i>
                 <div class="cart-info" id="cart-btn-info">
                     <span class="cart-empty-text">My Cart</span>
@@ -123,6 +123,266 @@
                 <button class="modal-btn" onclick="checkModalLocation()">
                     Start Shopping <i class="fas fa-arrow-right"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Dashboard Overlay -->
+    <div id="dashboard-overlay" class="dashboard-overlay hidden">
+        <div class="dashboard-backdrop" onclick="closeDashboard()"></div>
+        <div class="dashboard-panel">
+            <!-- Left Sidebar -->
+            <div class="dash-sidebar">
+                <div class="dash-user-info">
+                    <div class="dash-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 id="dash-greeting">Hi,</h3>
+                    <p id="dash-phone" class="dash-phone">+91 ••••••••••</p>
+                </div>
+
+                <nav class="dash-nav">
+                    <a class="dash-nav-item active" data-panel="profile" onclick="switchDashPanel('profile', this)">
+                        <i class="fas fa-user-circle"></i>
+                        <div>
+                            <span class="dash-nav-title">Profile</span>
+                            <span class="dash-nav-desc">Manage your account</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="mylist" onclick="switchDashPanel('mylist', this)">
+                        <i class="fas fa-list-ul"></i>
+                        <div>
+                            <span class="dash-nav-title">My List</span>
+                            <span class="dash-nav-desc">View recommended product list</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="wallet" onclick="switchDashPanel('wallet', this)">
+                        <i class="fas fa-wallet"></i>
+                        <div>
+                            <span class="dash-nav-title">Wallet</span>
+                            <span class="dash-nav-desc">Add money to your wallet</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="referral" onclick="switchDashPanel('referral', this)">
+                        <i class="fas fa-user-group"></i>
+                        <div>
+                            <span class="dash-nav-title">Referral</span>
+                            <span class="dash-nav-desc">Send invite to your friends</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="kisankash" onclick="switchDashPanel('kisankash', this)">
+                        <i class="fas fa-seedling"></i>
+                        <div>
+                            <span class="dash-nav-title">Agro Point</span>
+                            <span class="dash-nav-desc">Agro Point History</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="address" onclick="switchDashPanel('address', this)">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                            <span class="dash-nav-title">My Address</span>
+                            <span class="dash-nav-desc">Manage your address</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="notifications"
+                        onclick="switchDashPanel('notifications', this)">
+                        <i class="fas fa-bell"></i>
+                        <div>
+                            <span class="dash-nav-title">Notifications</span>
+                            <span class="dash-nav-desc">View Notifications</span>
+                        </div>
+                    </a>
+                    <a class="dash-nav-item" data-panel="cart" onclick="switchDashPanel('cart', this)">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div>
+                            <span class="dash-nav-title">My Cart</span>
+                            <span class="dash-nav-desc">View items in your cart</span>
+                        </div>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Right Content Area -->
+            <div class="dash-content">
+                <div class="dash-content-header">
+                    <h2 id="dash-content-title">Profile</h2>
+                    <button class="dash-close-btn" onclick="closeDashboard()"><i class="fas fa-times"></i></button>
+                </div>
+
+                <!-- Profile Panel -->
+                <div class="dash-panel active" id="panel-profile">
+                    <div class="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Enter Name</label>
+                                <input type="text" id="dash-name" placeholder="Enter Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="dash-email" placeholder="Enter Email">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone No.</label>
+                                <input type="tel" id="dash-phone-input" placeholder="Enter Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <label>Alternative No.</label>
+                                <input type="tel" id="dash-alt-phone" placeholder="Enter Alternative Number">
+                            </div>
+                        </div>
+                        <div class="form-action">
+                            <button class="dash-update-btn" onclick="updateProfile()">Update</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My List Panel -->
+                <div class="dash-panel" id="panel-mylist">
+                    <div class="dash-empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>Your Recommended List</h3>
+                        <p>Browse products and add your favorites to build your personalized list.</p>
+                        <button class="dash-action-btn" onclick="closeDashboard()">Browse Products</button>
+                    </div>
+                </div>
+
+                <!-- Wallet Panel -->
+                <div class="dash-panel" id="panel-wallet">
+                    <div class="wallet-balance-card">
+                        <div class="wallet-balance-info">
+                            <span class="wallet-label">Wallet Balance</span>
+                            <h2 class="wallet-amount">₹0.00</h2>
+                        </div>
+                        <i class="fas fa-wallet wallet-icon"></i>
+                    </div>
+                    <div class="wallet-actions">
+                        <div class="wallet-input-group">
+                            <input type="number" id="wallet-amount" placeholder="Enter amount" min="100">
+                            <button class="dash-action-btn" onclick="addToWallet()">Add Money</button>
+                        </div>
+                    </div>
+                    <div class="wallet-history">
+                        <h4>Transaction History</h4>
+                        <div class="dash-empty-state small">
+                            <i class="fas fa-receipt"></i>
+                            <p>No transactions yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referral Panel -->
+                <div class="dash-panel" id="panel-referral">
+                    <div class="referral-card">
+                        <div class="referral-icon"><i class="fas fa-gift"></i></div>
+                        <h3>Refer & Earn</h3>
+                        <p>Share your referral code with friends and earn ₹100 on each successful referral!</p>
+                        <div class="referral-code-box">
+                            <span id="referral-code">AGRO-UP2026</span>
+                            <button class="copy-btn" onclick="copyReferral()"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="referral-share">
+                            <button class="share-btn whatsapp" onclick="shareReferral('whatsapp')"><i
+                                    class="fab fa-whatsapp"></i> WhatsApp</button>
+                            <button class="share-btn sms" onclick="shareReferral('sms')"><i class="fas fa-sms"></i>
+                                SMS</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agro Point Panel -->
+                <div class="dash-panel" id="panel-kisankash">
+                    <div class="kisan-kash-card">
+                        <div class="kk-balance">
+                            <i class="fas fa-seedling kk-icon"></i>
+                            <div>
+                                <span class="kk-label">Agro Point Balance</span>
+                                <h2 class="kk-amount">0 Points</h2>
+                            </div>
+                        </div>
+                        <p class="kk-desc">Earn Agro Point points on every purchase. 100 points = ₹10 discount!</p>
+                    </div>
+                    <div class="kk-history">
+                        <h4>Agro Point History</h4>
+                        <div class="dash-empty-state small">
+                            <i class="fas fa-history"></i>
+                            <p>No activity yet. Start shopping to earn!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Address Panel -->
+                <div class="dash-panel" id="panel-address">
+                    <div class="address-form">
+                        <div class="form-group full">
+                            <label>Full Address</label>
+                            <textarea id="dash-address" placeholder="Flat No, Wing, Building Name, Street..."
+                                rows="3"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" id="dash-city" placeholder="City">
+                            </div>
+                            <div class="form-group">
+                                <label>Pincode</label>
+                                <input type="text" id="dash-pincode" placeholder="Pincode" maxlength="6">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" id="dash-state" placeholder="State">
+                            </div>
+                            <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" id="dash-landmark" placeholder="Near...">
+                            </div>
+                        </div>
+                        <div class="form-action">
+                            <button class="dash-update-btn" onclick="saveAddress()">Save Address</button>
+                        </div>
+                    </div>
+                    <div id="saved-addresses" class="saved-addresses"></div>
+                </div>
+
+                <!-- Notifications Panel -->
+                <div class="dash-panel" id="panel-notifications">
+                    <div class="notification-list">
+                        <div class="notification-item welcome">
+                            <div class="notif-icon"><i class="fas fa-bullhorn"></i></div>
+                            <div class="notif-content">
+                                <h4>Welcome to AGRO-UP! 🎉</h4>
+                                <p>Get farm-fresh produce delivered to your doorstep. Explore our collection of
+                                    handpicked fruits and vegetables.</p>
+                                <span class="notif-time">Just now</span>
+                            </div>
+                        </div>
+                        <div class="notification-item offer">
+                            <div class="notif-icon"><i class="fas fa-percent"></i></div>
+                            <div class="notif-content">
+                                <h4>First Order Discount!</h4>
+                                <p>Use code FRESH15 to get 15% off on your first order. Minimum order ₹299.</p>
+                                <span class="notif-time">Today</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Panel (inside dashboard) -->
+                <div class="dash-panel" id="panel-cart">
+                    <div id="dash-cart-items" class="dash-cart-items">
+                        <!-- Populated dynamically -->
+                    </div>
+                    <div class="dash-cart-summary" id="dash-cart-summary">
+                        <div class="summary-line"><span>Subtotal</span><span id="dash-sub-total">₹0</span></div>
+                        <div class="summary-line"><span>Delivery Fee</span><span class="free">FREE</span></div>
+                        <button class="dash-update-btn"
+                            onclick="closeDashboard(); toggleCart(); openAddressForm();">Proceed to Checkout <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

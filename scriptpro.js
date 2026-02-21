@@ -7,14 +7,15 @@ const inventory = [
     { id: 6, name: "Exotic Avocado", price: 190, unit: "pc", tag: "Imported", img: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=500" },
     // New Items
     { id: 7, name: "Organic Blueberries", price: 350, unit: "125g", tag: "Superfood", img: "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=500" },
-    { id: 8, name: "Red Bell Pepper", price: 45, unit: "pc", tag: "Crunchy", img: "https://images.unsplash.com/photo-1563565375-f3fdf5ec2e97?w=500" },
-    { id: 9, name: "Fresh Ginger", price: 40, unit: "250g", tag: "Root", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=500" },
+    { id: 8, name: "Red Bell Pepper", price: 45, unit: "pc", tag: "Crunchy", img: "images/red-bell-pepper.png" },
+    { id: 9, name: "Fresh Ginger", price: 40, unit: "250g", tag: "Root", img: "images/fresh-ginger.png" },
     { id: 10, name: "Nashik Onions", price: 35, unit: "1kg", tag: "Essential", img: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=500" },
-    { id: 11, name: "Italian Basil", price: 60, unit: "bunch", tag: "Aromatic", img: "https://images.unsplash.com/photo-1618164436241-4473940d1f5c?w=500" },
-    { id: 12, name: "Mini Watermelon", price: 120, unit: "pc", tag: "Summer", img: "https://images.unsplash.com/photo-1563114773-880cd2bfcf75?w=500" }
+    { id: 11, name: "Italian Basil", price: 60, unit: "bunch", tag: "Aromatic", img: "images/italian-basil.png" },
+    { id: 12, name: "Mini Watermelon", price: 120, unit: "pc", tag: "Summer", img: "images/mini-watermelon.png" }
 ];
 
 let cart = {};
+let wishlist = JSON.parse(localStorage.getItem('agro_wishlist') || '[]');
 
 // --- Persistent Location Logic ---
 
@@ -78,12 +79,32 @@ async function checkLocation() {
 
     document.getElementById('welcome-hero').innerHTML = "<h1>Finding store...</h1>";
 
-    setTimeout(() => {
-        document.getElementById('welcome-hero').classList.add('hidden');
-        document.getElementById('product-section').classList.remove('hidden');
-        document.getElementById('loc-tag').innerHTML = `<i class="fas fa-map-marker-alt"></i> Delivering to <b>${pin}</b>`;
-        renderProducts();
-    }, 800);
+    // Fetch location name from pincode
+    let locationName = pin; // fallback to pincode
+    try {
+        const response = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+        const data = await response.json();
+        if (data[0]?.Status === 'Success' && data[0]?.PostOffice?.length > 0) {
+            const po = data[0].PostOffice[0];
+            locationName = `${po.Name}, ${po.District}, ${po.State}`;
+            // Save location name for reuse
+            localStorage.setItem('delivery_location', locationName);
+        }
+    } catch (err) {
+        console.log('Pincode lookup failed, using pincode as fallback:', err);
+    }
+
+    // Update UI
+    document.getElementById('welcome-hero').classList.add('hidden');
+    document.getElementById('product-section').classList.remove('hidden');
+    document.getElementById('loc-tag').innerHTML = `<i class="fas fa-map-marker-alt"></i> Delivering to <b>${locationName}</b>`;
+
+    // Replace pincode in search bar with location name
+    const pincodeInput = document.getElementById('pincode');
+    pincodeInput.value = locationName;
+    pincodeInput.style.fontSize = '0.85rem';
+
+    renderProducts();
 }
 
 // --- Render Logic ---
@@ -106,9 +127,14 @@ function getProductButtonHTML(item) {
 
 function renderProducts() {
     const grid = document.getElementById('product-grid');
-    grid.innerHTML = inventory.map(item => `
+    grid.innerHTML = inventory.map(item => {
+        const isWished = wishlist.includes(item.id);
+        return `
                 <div class="product-card">
                     <span class="badge">${item.tag}</span>
+                    <button class="wishlist-heart ${isWished ? 'active' : ''}" onclick="toggleWishlist(${item.id}, event)" title="Add to My List">
+                        <i class="${isWished ? 'fas' : 'far'} fa-heart"></i>
+                    </button>
                     <img src="${item.img}" class="product-img">
                     <h3>${item.name}</h3>
                     <p style="color: var(--text-alt)">₹${item.price} / ${item.unit}</p>
@@ -116,7 +142,81 @@ function renderProducts() {
                         ${getProductButtonHTML(item)}
                     </div>
                 </div>
-            `).join('');
+            `;
+    }).join('');
+}
+
+function toggleWishlist(id, event) {
+    event.stopPropagation();
+    const btn = event.currentTarget;
+    const icon = btn.querySelector('i');
+
+    if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(i => i !== id);
+        btn.classList.remove('active');
+        icon.className = 'far fa-heart';
+    } else {
+        wishlist.push(id);
+        btn.classList.add('active');
+        icon.className = 'fas fa-heart';
+
+        // Blossom animation
+        btn.classList.add('blossom');
+        // Create burst particles
+        for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'heart-particle';
+            particle.style.setProperty('--angle', (i * 60) + 'deg');
+            btn.appendChild(particle);
+            setTimeout(() => particle.remove(), 600);
+        }
+        setTimeout(() => btn.classList.remove('blossom'), 600);
+    }
+
+    localStorage.setItem('agro_wishlist', JSON.stringify(wishlist));
+}
+
+function renderMyList() {
+    const panel = document.getElementById('panel-mylist');
+    if (wishlist.length === 0) {
+        panel.innerHTML = `
+            <div class="dash-empty-state">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Your List is Empty</h3>
+                <p>Tap the <i class="far fa-heart" style="color:#ef4444"></i> on products to add them here.</p>
+                <button class="dash-action-btn" onclick="closeDashboard()">Browse Products</button>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '<div class="mylist-grid">';
+    wishlist.forEach(id => {
+        const item = inventory.find(p => p.id === id);
+        if (!item) return;
+        html += `
+            <div class="mylist-item">
+                <img src="${item.img}" alt="${item.name}">
+                <div class="mylist-info">
+                    <h4>${item.name}</h4>
+                    <p>₹${item.price} / ${item.unit}</p>
+                </div>
+                <div class="mylist-actions">
+                    <button class="mylist-add-btn" onclick="addToCart(${item.id}); renderMyList();">ADD</button>
+                    <button class="mylist-remove-btn" onclick="removeFromList(${item.id})"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    panel.innerHTML = html;
+}
+
+function removeFromList(id) {
+    wishlist = wishlist.filter(i => i !== id);
+    localStorage.setItem('agro_wishlist', JSON.stringify(wishlist));
+    renderMyList();
+    renderProducts();
 }
 
 function updateCartItem(id, change) {
@@ -250,3 +350,259 @@ function placeOrder() {
     updateUI();
     renderProducts();
 }
+
+// ============================
+// Customer Dashboard
+// ============================
+
+function openDashboard() {
+    const overlay = document.getElementById('dashboard-overlay');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // Load saved profile data
+    loadProfileData();
+    // Load saved address data
+    loadAddressData();
+    // Render cart inside dashboard
+    renderDashCart();
+}
+
+function closeDashboard() {
+    const overlay = document.getElementById('dashboard-overlay');
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function switchDashPanel(panelName, navItem) {
+    // Update nav active state
+    document.querySelectorAll('.dash-nav-item').forEach(item => item.classList.remove('active'));
+    navItem.classList.add('active');
+
+    // Update content panels
+    document.querySelectorAll('.dash-panel').forEach(panel => panel.classList.remove('active'));
+    const panel = document.getElementById('panel-' + panelName);
+    if (panel) panel.classList.add('active');
+
+    // Update title
+    const titles = {
+        profile: 'Profile',
+        mylist: 'My List',
+        wallet: 'Wallet',
+        referral: 'Referral',
+        kisankash: 'Agro Point',
+        address: 'My Address',
+        notifications: 'Notifications',
+        cart: 'My Cart'
+    };
+    document.getElementById('dash-content-title').textContent = titles[panelName] || panelName;
+
+    // Refresh cart when switching to cart panel
+    if (panelName === 'cart') renderDashCart();
+    if (panelName === 'mylist') renderMyList();
+}
+
+// --- Profile ---
+function loadProfileData() {
+    const profile = JSON.parse(localStorage.getItem('agro_profile') || '{}');
+    if (profile.name) document.getElementById('dash-name').value = profile.name;
+    if (profile.email) document.getElementById('dash-email').value = profile.email;
+    if (profile.phone) {
+        document.getElementById('dash-phone-input').value = profile.phone;
+        document.getElementById('dash-phone').textContent = '+91 ' + profile.phone;
+        document.getElementById('dash-greeting').textContent = 'Hi, ' + (profile.name || '');
+    }
+    if (profile.altPhone) document.getElementById('dash-alt-phone').value = profile.altPhone;
+}
+
+function updateProfile() {
+    const profile = {
+        name: document.getElementById('dash-name').value,
+        email: document.getElementById('dash-email').value,
+        phone: document.getElementById('dash-phone-input').value,
+        altPhone: document.getElementById('dash-alt-phone').value
+    };
+    localStorage.setItem('agro_profile', JSON.stringify(profile));
+
+    // Update greeting
+    if (profile.name) document.getElementById('dash-greeting').textContent = 'Hi, ' + profile.name;
+    if (profile.phone) document.getElementById('dash-phone').textContent = '+91 ' + profile.phone;
+
+    // Show success feedback
+    const btn = document.querySelector('.profile-form .dash-update-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Updated!';
+    btn.style.background = 'linear-gradient(135deg, #8cc63f, #6da326)';
+    btn.style.color = 'white';
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+    }, 2000);
+}
+
+// --- Address ---
+function loadAddressData() {
+    const addresses = JSON.parse(localStorage.getItem('agro_addresses') || '[]');
+    const container = document.getElementById('saved-addresses');
+    if (addresses.length === 0) {
+        container.innerHTML = '';
+        return;
+    }
+
+    container.innerHTML = '<h4 style="margin-bottom: 10px; color: #555;">Saved Addresses</h4>';
+    addresses.forEach((addr, idx) => {
+        container.innerHTML += `
+            <div class="saved-address-card">
+                <p>${addr.address}, ${addr.city} - ${addr.pincode}<br>${addr.state}${addr.landmark ? ' (Near ' + addr.landmark + ')' : ''}</p>
+                <button onclick="deleteAddress(${idx})"><i class="fas fa-trash"></i> Remove</button>
+            </div>
+        `;
+    });
+}
+
+function saveAddress() {
+    const addr = {
+        address: document.getElementById('dash-address').value,
+        city: document.getElementById('dash-city').value,
+        pincode: document.getElementById('dash-pincode').value,
+        state: document.getElementById('dash-state').value,
+        landmark: document.getElementById('dash-landmark').value
+    };
+
+    if (!addr.address || !addr.city || !addr.pincode) {
+        alert('Please fill in Address, City, and Pincode.');
+        return;
+    }
+
+    const addresses = JSON.parse(localStorage.getItem('agro_addresses') || '[]');
+    addresses.push(addr);
+    localStorage.setItem('agro_addresses', JSON.stringify(addresses));
+
+    // Clear form
+    ['dash-address', 'dash-city', 'dash-pincode', 'dash-state', 'dash-landmark'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+
+    // Show success
+    const btn = document.querySelector('.address-form .dash-update-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Address Saved!';
+    btn.style.background = 'linear-gradient(135deg, #8cc63f, #6da326)';
+    btn.style.color = 'white';
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+    }, 2000);
+
+    loadAddressData();
+}
+
+function deleteAddress(index) {
+    const addresses = JSON.parse(localStorage.getItem('agro_addresses') || '[]');
+    addresses.splice(index, 1);
+    localStorage.setItem('agro_addresses', JSON.stringify(addresses));
+    loadAddressData();
+}
+
+// --- Wallet ---
+function addToWallet() {
+    const amountInput = document.getElementById('wallet-amount');
+    const amount = parseInt(amountInput.value);
+    if (!amount || amount < 1) {
+        alert('Please enter a valid amount.');
+        return;
+    }
+
+    let balance = parseFloat(localStorage.getItem('agro_wallet') || '0');
+    balance += amount;
+    localStorage.setItem('agro_wallet', balance.toFixed(2));
+
+    document.querySelector('.wallet-amount').textContent = '₹' + balance.toFixed(2);
+    amountInput.value = '';
+
+    // Show success
+    const btn = document.querySelector('.wallet-actions .dash-action-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Added!';
+    setTimeout(() => { btn.textContent = originalText; }, 1500);
+}
+
+// --- Referral ---
+function copyReferral() {
+    const code = document.getElementById('referral-code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+    });
+}
+
+function shareReferral(platform) {
+    const code = document.getElementById('referral-code').textContent;
+    const message = `Join AGRO-UP for farm-fresh produce delivery! Use my referral code: ${code} and get ₹100 off your first order. 🥬🍎`;
+
+    if (platform === 'whatsapp') {
+        window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+    } else if (platform === 'sms') {
+        window.open(`sms:?body=${encodeURIComponent(message)}`, '_blank');
+    }
+}
+
+// --- Dashboard Cart ---
+function renderDashCart() {
+    const container = document.getElementById('dash-cart-items');
+    const summary = document.getElementById('dash-cart-summary');
+
+    const itemIds = Object.keys(cart);
+    if (itemIds.length === 0) {
+        container.innerHTML = `
+            <div class="dash-empty-state">
+                <i class="fas fa-shopping-basket"></i>
+                <h3>Your cart is empty</h3>
+                <p>Add items from the product page to see them here.</p>
+                <button class="dash-action-btn" onclick="closeDashboard()">Browse Products</button>
+            </div>
+        `;
+        summary.style.display = 'none';
+        return;
+    }
+
+    summary.style.display = 'block';
+    let total = 0;
+    let html = '';
+
+    itemIds.forEach(id => {
+        const item = inventory.find(p => p.id == id);
+        if (!item) return;
+        const qty = cart[id];
+        const price = item.price * qty;
+        total += price;
+
+        html += `
+            <div class="dash-cart-item">
+                <div class="dash-cart-item-info">
+                    <img src="${item.img}" class="dash-cart-item-img" alt="${item.name}">
+                    <div>
+                        <div class="dash-cart-item-name">${item.name}</div>
+                        <div class="dash-cart-item-qty">Qty: ${qty} × ₹${item.price}</div>
+                    </div>
+                </div>
+                <span class="dash-cart-item-price">₹${price}</span>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+    document.getElementById('dash-sub-total').textContent = '₹' + total;
+}
+
+// Load wallet balance on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const balance = localStorage.getItem('agro_wallet');
+    if (balance) {
+        const el = document.querySelector('.wallet-amount');
+        if (el) el.textContent = '₹' + parseFloat(balance).toFixed(2);
+    }
+});
