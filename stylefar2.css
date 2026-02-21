@@ -64,3 +64,286 @@ input {
 .lang-options { margin-top: 10px; display: flex; gap: 20px; }
 .shape-top { position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--primary-green); border-radius: 50%; z-index: -1; }
 .shape-bottom { position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; background: #a4b0be66; border-radius: 50%; z-index: -1; }
+
+/* ============================
+   Voice Call UI Styles
+   ============================ */
+
+.voice-call-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+/* Call Status */
+.call-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f0f0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.call-status.connecting { background: #fff8e1; color: #f59e0b; }
+.call-status.active { background: #e8f5e9; color: #22c55e; }
+.call-status.ended { background: #fce4ec; color: #ef4444; }
+.call-status.error { background: #fce4ec; color: #ef4444; }
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background 0.3s;
+}
+
+.call-status.connecting .status-dot {
+    background: #f59e0b;
+    animation: blink 1s infinite;
+}
+.call-status.active .status-dot { background: #22c55e; }
+.call-status.ended .status-dot { background: #ef4444; }
+.call-status.error .status-dot { background: #ef4444; }
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Voice Avatar */
+.voice-avatar-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.voice-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-green) 0%, #6da326 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(140, 198, 63, 0.35);
+    transition: transform 0.3s;
+}
+
+.voice-avatar.speaking {
+    transform: scale(1.05);
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-green);
+    opacity: 0;
+    z-index: 1;
+}
+
+.pulse-ring.active {
+    animation: pulseRing 1.8s ease-out infinite;
+}
+
+@keyframes pulseRing {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Titles */
+.voice-title {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.voice-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0;
+}
+
+/* Transcript */
+.transcript-container {
+    width: 100%;
+    max-height: 160px;
+    min-height: 80px;
+    background: #f7f9f5;
+    border-radius: 16px;
+    border: 1px solid #e8ece4;
+    overflow-y: auto;
+    margin: 5px 0;
+}
+
+.transcript-messages {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transcript-msg {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    max-width: 85%;
+    animation: msgIn 0.3s ease-out;
+    word-wrap: break-word;
+}
+
+.transcript-msg.ai {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    color: #2e5a27;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.transcript-msg.user {
+    background: #fff;
+    color: #333;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    border: 1px solid #eee;
+}
+
+@keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Call Controls */
+.call-controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.end-call-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.end-call-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.end-call-btn:active {
+    transform: scale(0.95);
+}
+
+.end-call-btn.hidden {
+    display: none;
+}
+
+/* Call Timer */
+.call-timer {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+}
+
+/* Transcript empty placeholder */
+.transcript-placeholder {
+    text-align: center;
+    color: #bbb;
+    font-size: 0.85rem;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Call ended state */
+.call-ended-summary {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.call-ended-summary h3 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.call-ended-summary p {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.restart-btn:hover {
+    background: #7ab332;
+    transform: translateY(-2px);
+}
+
+/* Error UI */
+.error-container {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.error-container .error-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.error-container p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.retry-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 5px;
+}
+
+.retry-btn:hover {
+    background: #7ab332;
+}

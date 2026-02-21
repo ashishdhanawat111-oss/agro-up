@@ -1,96 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmer Connect | AGRO-UP</title>
-    <link rel="stylesheet" href="stylefar2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Connect | AGRO-UP</title>
+  <link rel="stylesheet" href="stylefar2.css">
 </head>
+
 <body>
-<header class="navbar">
-  <div class="nav-left">
-    <div class="logo">AGRO-UP</div>
-    <span class="divider">|</span>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about2.html">About</a></li>
-        <li><a href="product.html">Products</a></li>
-        <li><a href="farmer2.html">Partnership</a></li>
-        <li><a href="subscription.html">Subscription</a></li> 
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div class="nav-right">
-    <a href="#" class="cta-button">Order now</a>
-  </div>
-</header>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo">AGRO-UP</div>
+      <span class="divider">|</span>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about2.html">About</a></li>
+          <li><a href="product.html">Products</a></li>
+          <li><a href="farmer2.html">Partnership</a></li>
+          <li><a href="subscription.html">Subscription</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="cta-button">Order now</a>
+    </div>
+  </header>
 
-<div class="shape-top"></div>
-<div class="shape-bottom"></div>
+  <div class="shape-top"></div>
+  <div class="shape-bottom"></div>
 
-<div class="container" id="quiz-container">
+  <div class="container" id="quiz-container">
     <div class="slide active" id="slide-0">
-        <h1 data-en="Welcome Farmer !!!" data-hi="किसान भाई का स्वागत है !!!">Welcome Farmer !!!</h1>
-        <p data-en="Let's get your fresh produce to thousands of customers." data-hi="आइए आपकी ताजा उपज को हजारों ग्राहकों तक पहुंचाएं।">Let's get your fresh produce to thousands of customers.</p>
-        <button class="next-btn" onclick="nextSlide()">Get Started →</button>
+      <h1 data-en="Welcome Farmer !!!" data-hi="किसान भाई का स्वागत है !!!">Welcome Farmer !!!</h1>
+      <p data-en="Let's get your fresh produce to thousands of customers."
+        data-hi="आइए आपकी ताजा उपज को हजारों ग्राहकों तक पहुंचाएं।">Let's get your fresh produce to thousands of
+        customers.</p>
+      <button class="next-btn" onclick="nextSlide()">Get Started →</button>
     </div>
 
     <div class="slide" id="slide-1">
-        <button class="back-btn" onclick="prevSlide()">← Back</button>
-        <div class="step-label">Step 1 of 5</div>
-        <h1 data-en="What is your name?" data-hi="आपका नाम क्या है?">What is your name?</h1>
-        
-        <div class="lang-select">
-            <label>Select Language / भाषा चुनें:</label>
-            <div class="lang-options">
-                <input type="radio" name="lang" value="en" id="lang-en" checked onclick="toggleLanguage('en')">
-                <label for="lang-en">English</label>
-                <input type="radio" name="lang" value="hi" id="lang-hi" onclick="toggleLanguage('hi')">
-                <label for="lang-hi">हिन्दी</label>
-            </div>
-        </div>
+      <button class="back-btn" onclick="prevSlide()">← Back</button>
+      <div class="step-label">Step 1 of 5</div>
+      <h1 data-en="What is your name?" data-hi="आपका नाम क्या है?">What is your name?</h1>
 
-        <input type="text" placeholder="Enter full name" id="name">
-        <button class="next-btn" onclick="nextSlide()">Continue</button>
+      <div class="lang-select">
+        <label>Select Language / भाषा चुनें:</label>
+        <div class="lang-options">
+          <input type="radio" name="lang" value="en" id="lang-en" checked onclick="toggleLanguage('en')">
+          <label for="lang-en">English</label>
+          <input type="radio" name="lang" value="hi" id="lang-hi" onclick="toggleLanguage('hi')">
+          <label for="lang-hi">हिन्दी</label>
+        </div>
+      </div>
+
+      <input type="text" placeholder="Enter full name" id="name">
+      <button class="next-btn" onclick="nextSlide()">Continue</button>
     </div>
 
     <div class="slide" id="slide-2">
-        <button class="back-btn" onclick="prevSlide()">← Back</button>
-        <div class="step-label">Step 2 of 5</div>
-        <h1 data-en="What crops do you grow?" data-hi="आप कौन सी फसलें उगाते हैं?">What crops do you grow?</h1>
-        <button class="option-btn" onclick="nextSlide()" data-en="Leafy Greens (Palak, Methi)" data-hi="हरी सब्जियां (पालक, मेथी)">Leafy Greens (Palak, Methi)</button>
-        <button class="option-btn" onclick="nextSlide()" data-en="Root Crops (Aloo, Pyaaz)" data-hi="कंद वाली फसलें (आलू, प्याज)">Root Crops (Aloo, Pyaaz)</button>
-        <button class="option-btn" onclick="nextSlide()" data-en="Seasonal Fruits" data-hi="मौसमी फल">Seasonal Fruits</button>
-        <button class="option-btn" onclick="nextSlide()" data-en="Other" data-hi="अन्य">Other</button>
+      <button class="back-btn" onclick="prevSlide()">← Back</button>
+      <div class="step-label">Step 2 of 5</div>
+      <h1 data-en="What crops do you grow?" data-hi="आप कौन सी फसलें उगाते हैं?">What crops do you grow?</h1>
+      <button class="option-btn" onclick="nextSlide()" data-en="Leafy Greens (Palak, Methi)"
+        data-hi="हरी सब्जियां (पालक, मेथी)">Leafy Greens (Palak, Methi)</button>
+      <button class="option-btn" onclick="nextSlide()" data-en="Root Crops (Aloo, Pyaaz)"
+        data-hi="कंद वाली फसलें (आलू, प्याज)">Root Crops (Aloo, Pyaaz)</button>
+      <button class="option-btn" onclick="nextSlide()" data-en="Seasonal Fruits" data-hi="मौसमी फल">Seasonal
+        Fruits</button>
+      <button class="option-btn" onclick="nextSlide()" data-en="Other" data-hi="अन्य">Other</button>
     </div>
 
     <div class="slide" id="slide-3">
-        <button class="back-btn" onclick="prevSlide()">← Back</button>
-        <div class="step-label">Step 3 of 5</div>
-        <h1 data-en="Where is your farm?" data-hi="आपका खेत कहाँ है?">Where is your farm?</h1>
-        <input type="text" placeholder="Enter your pincode" id="location">
-        <button class="next-btn" onclick="nextSlide()">Continue</button>
+      <button class="back-btn" onclick="prevSlide()">← Back</button>
+      <div class="step-label">Step 3 of 5</div>
+      <h1 data-en="Where is your farm?" data-hi="आपका खेत कहाँ है?">Where is your farm?</h1>
+      <input type="text" placeholder="Enter your pincode" id="location">
+      <button class="next-btn" onclick="nextSlide()">Continue</button>
     </div>
 
     <div class="slide" id="slide-4">
-        <button class="back-btn" onclick="prevSlide()">← Back</button>
-        <div class="step-label">Step 4 of 5</div>
-        <h1 data-en="Contact Number" data-hi="संपर्क नंबर">Contact Number</h1>
-        <input type="tel" placeholder="Mobile Number" id="phone">
-        <button class="next-btn" onclick="nextSlide()">Continue</button>
+      <button class="back-btn" onclick="prevSlide()">← Back</button>
+      <div class="step-label">Step 4 of 5</div>
+      <h1 data-en="Contact Number" data-hi="संपर्क नंबर">Contact Number</h1>
+      <input type="tel" placeholder="Mobile Number" id="phone">
+      <button class="next-btn" onclick="nextSlide()">Continue</button>
     </div>
 
     <div class="slide" id="slide-5">
-        <button class="back-btn" onclick="prevSlide()">← Back</button>
-        <div class="step-label">Step 5 of 5</div>
-        <h1 data-en="Ready to talk to AI?" data-hi="AI सहायक से बात करने के लिए तैयार हैं?">Ready to talk to AI?</h1>
-        <p data-en="Our assistant will help you set your prices." data-hi="हमारा सहायक आपको कीमतें तय करने में मदद करेगा।">Our assistant will help you set your prices.</p>
-        <button class="next-btn" onclick="finish()" data-en="Connect with AI Assistant" data-hi="AI सहायक से जुड़ें">Connect with AI Assistant</button>
+      <button class="back-btn" onclick="prevSlide()">← Back</button>
+      <div class="step-label">Step 5 of 5</div>
+      <h1 data-en="Ready to talk to AI?" data-hi="AI सहायक से बात करने के लिए तैयार हैं?">Ready to talk to AI?</h1>
+      <p data-en="Our assistant will help you set your prices."
+        data-hi="हमारा सहायक आपको कीमतें तय करने में मदद करेगा।">Our assistant will help you set your prices.</p>
+      <button class="next-btn" onclick="finish()" data-en="Connect with AI Assistant"
+        data-hi="AI सहायक से जुड़ें">Connect with AI Assistant</button>
     </div>
-</div>
 
-<script src="scriptfar2.js"></script>
+    <!-- Slide 6: AI Voice Call UI -->
+    <div class="slide" id="slide-6">
+      <div class="voice-call-container">
+        <!-- Call Status Header -->
+        <div class="call-status" id="call-status">
+          <div class="status-dot" id="status-dot"></div>
+          <span id="status-text">Connecting...</span>
+        </div>
+
+        <!-- AI Avatar & Mic Animation -->
+        <div class="voice-avatar-wrapper">
+          <div class="pulse-ring" id="pulse-ring"></div>
+          <div class="voice-avatar" id="voice-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" x2="12" y1="19" y2="22" />
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="voice-title" id="voice-title">AGRO-UP AI Assistant</h2>
+        <p class="voice-subtitle" id="voice-subtitle">Connecting you to your farming advisor...</p>
+
+        <!-- Live Transcript -->
+        <div class="transcript-container" id="transcript-container">
+          <div class="transcript-messages" id="transcript-messages">
+            <!-- Messages added dynamically -->
+          </div>
+        </div>
+
+        <!-- Call Controls -->
+        <div class="call-controls">
+          <button class="end-call-btn" id="end-call-btn" onclick="endVoiceCall()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 2.59 3.4Z" />
+            </svg>
+            <span>End Call</span>
+          </button>
+        </div>
+
+        <!-- Call Timer -->
+        <div class="call-timer" id="call-timer">00:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vapi Web SDK (core package) + App Script -->
+  <script type="module">
+    import VapiModule from 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.2.5/+esm';
+    // Handle both default and named export patterns
+    window.VapiSDK = VapiModule.default || VapiModule;
+    window.dispatchEvent(new Event('vapi-ready'));
+  </script>
+  <script src="scriptfar2.js" defer></script>
 </body>
+
 </html>
