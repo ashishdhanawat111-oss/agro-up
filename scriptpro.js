@@ -1,17 +1,17 @@
 const inventory = [
-    { id: 1, name: "Premium Strawberries", price: 299, unit: "250g", tag: "Berry Season", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=500" },
-    { id: 2, name: "Baby Spinach (Hydro)", price: 85, unit: "100g", tag: "Fresh", img: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=500" },
-    { id: 3, name: "Purple Broccoli", price: 140, unit: "pc", tag: "Organic", img: "https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?w=500" },
-    { id: 4, name: "Alphonso Mango", price: 650, unit: "6pcs", tag: "Bestseller", img: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=500" },
-    { id: 5, name: "Cherry Tomatoes", price: 110, unit: "box", tag: "New", img: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=500" },
-    { id: 6, name: "Exotic Avocado", price: 190, unit: "pc", tag: "Imported", img: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=500" },
+    { id: 1, name: "Premium Strawberries", price:250, unit: "250g", tag: "Berry Season", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=500" },
+    { id: 2, name: "Baby Spinach (Hydro)", price: 48, unit: "100g", tag: "Fresh", img: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=500" },
+    { id: 3, name: "Purple Broccoli", price: 65, unit: "kg", tag: "Organic", img: "https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?w=500" },
+    { id: 4, name: "Alphonso Mango", price: 190, unit: "1kg", tag: "Bestseller", img: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=500" },
+    { id: 5, name: "Cherry Tomatoes", price: 100, unit: "box", tag: "New", img: "https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?w=500" },
+    { id: 6, name: "Exotic Avocado", price: 100, unit: "pc", tag: "Imported", img: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=500" },
     // New Items
-    { id: 7, name: "Organic Blueberries", price: 350, unit: "125g", tag: "Superfood", img: "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=500" },
-    { id: 8, name: "Red Bell Pepper", price: 45, unit: "pc", tag: "Crunchy", img: "images/red-bell-pepper.png" },
+    { id: 7, name: "Organic Blueberries", price: 220, unit: "125g", tag: "Superfood", img: "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=500" },
+    { id: 8, name: "Red Bell Pepper", price: 15, unit: "pc", tag: "Crunchy", img: "images/red-bell-pepper.png" },
     { id: 9, name: "Fresh Ginger", price: 40, unit: "250g", tag: "Root", img: "images/fresh-ginger.png" },
     { id: 10, name: "Nashik Onions", price: 35, unit: "1kg", tag: "Essential", img: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=500" },
     { id: 11, name: "Italian Basil", price: 60, unit: "bunch", tag: "Aromatic", img: "images/italian-basil.png" },
-    { id: 12, name: "Mini Watermelon", price: 120, unit: "pc", tag: "Summer", img: "images/mini-watermelon.png" }
+    { id: 12, name: "Mini Watermelon", price: 99, unit: "pc", tag: "Summer", img: "images/mini-watermelon.png" }
 ];
 
 let cart = {};
