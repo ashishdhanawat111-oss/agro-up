@@ -84,7 +84,10 @@
             <div id="cart-items-list" class="scroll-area"></div>
             <div class="checkout-summary">
                 <div class="summary-line"><span>Subtotal</span><span id="sub-total">₹0</span></div>
-                <div class="summary-line"><span>Delivery Fee</span><span class="free">FREE</span></div>
+                <div class="summary-line"><span>Delivery Fee</span><span id="delivery-fee" class="free">FREE</span>
+                </div>
+                <div class="summary-line total-line"><span><b>Total</b></span><span id="cart-total"><b>₹0</b></span>
+                </div>
                 <button class="pay-btn" onclick="openAddressForm()">Proceed to Address <i
                         class="fas fa-arrow-right"></i></button>
             </div>
@@ -377,7 +380,10 @@
                     </div>
                     <div class="dash-cart-summary" id="dash-cart-summary">
                         <div class="summary-line"><span>Subtotal</span><span id="dash-sub-total">₹0</span></div>
-                        <div class="summary-line"><span>Delivery Fee</span><span class="free">FREE</span></div>
+                        <div class="summary-line"><span>Delivery Fee</span><span id="dash-delivery-fee"
+                                class="free">FREE</span></div>
+                        <div class="summary-line total-line"><span><b>Total</b></span><span
+                                id="dash-cart-total"><b>₹0</b></span></div>
                         <button class="dash-update-btn"
                             onclick="closeDashboard(); toggleCart(); openAddressForm();">Proceed to Checkout <i
                                 class="fas fa-arrow-right"></i></button>

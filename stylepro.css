@@ -1357,6 +1357,18 @@ nav ul li a {
   font-weight: 600;
 }
 
+.delivery-charge {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.total-line {
+  border-top: 1.5px solid #e0e0e0;
+  padding-top: 8px;
+  margin-top: 4px;
+  font-size: 1rem;
+}
+
 /* Saved Addresses */
 .saved-addresses {
   margin-top: 20px;

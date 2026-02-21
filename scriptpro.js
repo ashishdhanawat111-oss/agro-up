@@ -274,6 +274,22 @@ function updateUI() {
     }
 
     document.getElementById('sub-total').innerText = `₹${total}`;
+
+    // Update delivery fee
+    const deliveryFee = getDeliveryFee(total);
+    const feeEl = document.getElementById('delivery-fee');
+    if (feeEl) {
+        if (deliveryFee === 0) {
+            feeEl.textContent = 'FREE';
+            feeEl.className = 'free';
+        } else {
+            feeEl.textContent = '₹' + deliveryFee;
+            feeEl.className = 'delivery-charge';
+        }
+    }
+    // Update total (subtotal + delivery)
+    const totalEl = document.getElementById('cart-total');
+    if (totalEl) totalEl.innerHTML = '<b>₹' + (total + deliveryFee) + '</b>';
 }
 
 function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
@@ -576,7 +592,7 @@ function renderDashCart() {
     itemIds.forEach(id => {
         const item = inventory.find(p => p.id == id);
         if (!item) return;
-        const qty = cart[id];
+        const qty = cart[id].qty || cart[id];
         const price = item.price * qty;
         total += price;
 
@@ -596,6 +612,29 @@ function renderDashCart() {
 
     container.innerHTML = html;
     document.getElementById('dash-sub-total').textContent = '₹' + total;
+
+    // Update delivery fee in dashboard
+    const deliveryFee = getDeliveryFee(total);
+    const feeEl = document.getElementById('dash-delivery-fee');
+    if (feeEl) {
+        if (deliveryFee === 0) {
+            feeEl.textContent = 'FREE';
+            feeEl.className = 'free';
+        } else {
+            feeEl.textContent = '₹' + deliveryFee;
+            feeEl.className = 'delivery-charge';
+        }
+    }
+    // Update total (subtotal + delivery)
+    const dashTotalEl = document.getElementById('dash-cart-total');
+    if (dashTotalEl) dashTotalEl.innerHTML = '<b>₹' + (total + deliveryFee) + '</b>';
+}
+
+// Delivery fee logic: Free if >₹499 or has subscription, else ₹30
+function getDeliveryFee(subtotal) {
+    const hasSubscription = localStorage.getItem('agro_subscription') === 'true';
+    if (hasSubscription || subtotal >= 499) return 0;
+    return 30;
 }
 
 // Load wallet balance on page load
