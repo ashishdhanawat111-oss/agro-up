@@ -1,5 +1,5 @@
 const inventory = [
-    { id: 1, name: "Premium Strawberries", price:250, unit: "250g", tag: "Berry Season", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=500" },
+    { id: 1, name: "Premium Strawberries", price: 250, unit: "250g", tag: "Berry Season", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=500" },
     { id: 2, name: "Baby Spinach (Hydro)", price: 48, unit: "100g", tag: "Fresh", img: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=500" },
     { id: 3, name: "Purple Broccoli", price: 65, unit: "kg", tag: "Organic", img: "https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?w=500" },
     { id: 4, name: "Alphonso Mango", price: 190, unit: "1kg", tag: "Bestseller", img: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=500" },
@@ -343,17 +343,129 @@ function placeOrder() {
         return;
     }
 
+    // Check payment method
+    const payMethod = document.querySelector('input[name="pay"]:checked').value;
+
+    if (payMethod === 'UPI') {
+        // Show UPI payment screen with QR code
+        openUpiPayment();
+        return;
+    }
+
+    // COD — directly confirm order
+    completeOrder(addr);
+}
+
+// ============================
+// UPI Payment Flow
+// ============================
+let upiTimerInterval = null;
+let upiTimeRemaining = 300; // 5 minutes in seconds
+
+function openUpiPayment() {
+    // Calculate total
+    let total = 0;
+    Object.values(cart).forEach(i => { total += i.price * i.qty; });
+
+    // Show UPI view, hide address view
+    document.getElementById('address-view').classList.add('hidden');
+    document.getElementById('upi-payment-view').classList.remove('hidden');
+
+    // Set amount
+    document.getElementById('upi-total-amount').textContent = '₹' + total;
+
+    // Start 5-minute timer
+    upiTimeRemaining = 300;
+    startUpiTimer();
+}
+
+function startUpiTimer() {
+    const timerEl = document.getElementById('upi-timer');
+
+    // Clear any existing timer
+    if (upiTimerInterval) clearInterval(upiTimerInterval);
+
+    updateTimerDisplay(timerEl);
+
+    upiTimerInterval = setInterval(() => {
+        upiTimeRemaining--;
+
+        if (upiTimeRemaining <= 0) {
+            clearInterval(upiTimerInterval);
+            upiTimerInterval = null;
+            timerEl.textContent = '00:00';
+            timerEl.style.color = '#ef4444';
+
+            // Show expiry alert
+            alert('⏰ Payment time expired! Please try again.');
+            closeUpiPayment();
+            return;
+        }
+
+        updateTimerDisplay(timerEl);
+
+        // Turn red when less than 1 minute
+        if (upiTimeRemaining <= 60) {
+            timerEl.style.color = '#ef4444';
+            timerEl.style.fontWeight = '800';
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay(el) {
+    const mins = String(Math.floor(upiTimeRemaining / 60)).padStart(2, '0');
+    const secs = String(upiTimeRemaining % 60).padStart(2, '0');
+    el.textContent = `${mins}:${secs}`;
+}
+
+function closeUpiPayment() {
+    // Stop timer
+    if (upiTimerInterval) {
+        clearInterval(upiTimerInterval);
+        upiTimerInterval = null;
+    }
+
+    // Reset timer display
+    const timerEl = document.getElementById('upi-timer');
+    timerEl.textContent = '05:00';
+    timerEl.style.color = '';
+    timerEl.style.fontWeight = '';
+
+    // Go back to address view
+    document.getElementById('upi-payment-view').classList.add('hidden');
+    document.getElementById('address-view').classList.remove('hidden');
+}
+
+function confirmUpiPayment() {
+    // Stop timer
+    if (upiTimerInterval) {
+        clearInterval(upiTimerInterval);
+        upiTimerInterval = null;
+    }
+
+    const addr = document.getElementById('address').value;
+
+    // Hide UPI view
+    document.getElementById('upi-payment-view').classList.add('hidden');
+
+    // Show order confirmed in address-view
+    completeOrder(addr, true);
+}
+
+function completeOrder(addr, isUpi = false) {
     const addressView = document.getElementById('address-view');
+    addressView.classList.remove('hidden');
     addressView.innerHTML = `
                 <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; animation: fadeIn 0.5s ease;">
                     <div style="width: 80px; height: 80px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
                         <i class="fas fa-check" style="font-size: 40px; color: #059669;"></i>
                     </div>
                     <h3 style="font-size: 1.5rem; margin: 0 0 10px 0;">Order Confirmed!</h3>
-                    <p style="color: #64748b; margin-bottom: 30px; line-height: 1.5;">
+                    <p style="color: #64748b; margin-bottom: 10px; line-height: 1.5;">
                         We've received your order.<br>
                         Delivering to <b>${addr}</b> in 10-15 mins.
                     </p>
+                    ${isUpi ? '<p style="color: #059669; font-weight: 600; margin-bottom: 20px;"><i class="fas fa-check-circle"></i> Paid via UPI</p>' : ''}
                     <button class="pay-btn" onclick="location.reload()">Start New Order</button>
                 </div>
                 <style>

@@ -110,6 +110,46 @@
                 <button class="text-btn" onclick="backToCart()">Modify Items</button>
             </div>
         </div>
+
+        <!-- UPI Payment Modal -->
+        <div id="upi-payment-view" class="hidden">
+            <div class="upi-payment-container">
+                <div class="upi-header">
+                    <button class="upi-back-btn" onclick="closeUpiPayment()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h3>UPI Payment</h3>
+                </div>
+
+                <div class="upi-amount-box">
+                    <span class="upi-amount-label">Amount to Pay</span>
+                    <span class="upi-amount-value" id="upi-total-amount">₹0</span>
+                </div>
+
+                <div class="upi-timer-box">
+                    <i class="fas fa-clock"></i>
+                    <span>Complete payment within</span>
+                    <span class="upi-timer" id="upi-timer">05:00</span>
+                </div>
+
+                <div class="upi-qr-wrapper">
+                    <img src="images/upi-qr-code.jpg" alt="UPI QR Code" class="upi-qr-image">
+                </div>
+
+                <p class="upi-scan-text">Scan to pay with any UPI app</p>
+
+                <div class="upi-apps-row">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/512px-Google_Pay_Logo.svg.png"
+                        alt="GPay" title="Google Pay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/512px-PhonePe_Logo.svg.png"
+                        alt="PhonePe" title="PhonePe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/512px-UPI-Logo-vector.svg.png"
+                        alt="UPI" title="UPI">
+                </div>
+
+
+            </div>
+        </div>
     </div>
 
     <!-- Pincode Modal -->

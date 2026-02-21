@@ -13,11 +13,104 @@ let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 
 function nextSlide() {
+    // Validate before proceeding (skip validation for slide 0 — the welcome screen)
+    if (currentSlide > 0 && !validateCurrentSlide()) {
+        return;
+    }
+
     slides[currentSlide].classList.remove('active');
     currentSlide++;
     if (currentSlide < slides.length) {
         slides[currentSlide].classList.add('active');
     }
+}
+
+// ========== VALIDATION ==========
+function validateCurrentSlide() {
+    const isHindi = document.getElementById('lang-hi').checked;
+
+    switch (currentSlide) {
+        case 1: { // Step 1: Name
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                showValidationAlert(
+                    isHindi ? 'कृपया अपना पूरा नाम दर्ज करें' : 'Please enter your full name'
+                );
+                document.getElementById('name').focus();
+                return false;
+            }
+            return true;
+        }
+        case 2: // Step 2: Crop selection (option buttons call nextSlide directly, always valid)
+            return true;
+
+        case 3: { // Step 3: Location / Pincode
+            const location = document.getElementById('location').value.trim();
+            if (!location) {
+                showValidationAlert(
+                    isHindi ? 'कृपया अपना पिनकोड या स्थान दर्ज करें' : 'Please enter your pincode or location'
+                );
+                document.getElementById('location').focus();
+                return false;
+            }
+            return true;
+        }
+        case 4: { // Step 4: Phone number
+            const phone = document.getElementById('phone').value.trim();
+            if (!phone) {
+                showValidationAlert(
+                    isHindi ? 'कृपया अपना मोबाइल नंबर दर्ज करें' : 'Please enter your mobile number'
+                );
+                document.getElementById('phone').focus();
+                return false;
+            }
+            // Check for 10-digit number
+            const digitsOnly = phone.replace(/\D/g, '');
+            if (digitsOnly.length !== 10) {
+                showValidationAlert(
+                    isHindi ? 'कृपया 10 अंकों का मोबाइल नंबर दर्ज करें' : 'Please enter a valid 10-digit mobile number'
+                );
+                document.getElementById('phone').focus();
+                return false;
+            }
+            return true;
+        }
+        default:
+            return true;
+    }
+}
+
+function showValidationAlert(message) {
+    // Remove any existing alert
+    const existing = document.querySelector('.validation-alert');
+    if (existing) existing.remove();
+
+    // Create alert element
+    const alert = document.createElement('div');
+    alert.className = 'validation-alert';
+    alert.innerHTML = `
+        <span class="validation-alert-icon">⚠️</span>
+        <span class="validation-alert-text">${message}</span>
+    `;
+
+    // Insert at the top of the current slide
+    const currentSlideEl = slides[currentSlide];
+    currentSlideEl.insertBefore(alert, currentSlideEl.firstChild);
+
+    // Shake the input to draw attention
+    const input = currentSlideEl.querySelector('input');
+    if (input) {
+        input.classList.add('input-shake');
+        setTimeout(() => input.classList.remove('input-shake'), 500);
+    }
+
+    // Auto-dismiss after 3 seconds
+    setTimeout(() => {
+        if (alert.parentNode) {
+            alert.classList.add('validation-alert-hide');
+            setTimeout(() => alert.remove(), 300);
+        }
+    }, 3000);
 }
 
 function prevSlide() {

@@ -413,11 +413,12 @@ nav ul li a {
 }
 
 #cart-view,
-#address-view {
+#address-view,
+#upi-payment-view {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .scroll-area {
@@ -1642,5 +1643,187 @@ nav ul li a {
 
   .dash-panel {
     padding: 15px;
+  }
+}
+
+/* ============================
+   UPI Payment Styles
+   ============================ */
+
+.upi-payment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+.upi-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.upi-back-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.upi-back-btn:hover {
+  background: #f0f0f0;
+}
+
+.upi-header h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+  font-weight: 700;
+}
+
+.upi-amount-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(135deg, #e8f5e0, #f1f8e9);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.upi-amount-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.upi-amount-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #2d5a1e;
+}
+
+.upi-timer-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  color: #8d6e00;
+  font-weight: 600;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.upi-timer-box i {
+  color: #f59e0b;
+}
+
+.upi-timer {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #d97706;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  animation: timerPulse 1s infinite;
+}
+
+@keyframes timerPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.upi-qr-wrapper {
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.upi-qr-image {
+  width: 200px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.upi-scan-text {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 6px 0 12px;
+  font-weight: 500;
+}
+
+.upi-apps-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.upi-apps-row img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.upi-apps-row img:hover {
+  opacity: 1;
+}
+
+.upi-confirm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font-size: 0.95rem;
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.upi-confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
